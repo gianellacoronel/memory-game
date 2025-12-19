@@ -1,6 +1,8 @@
 import type { Emoji } from "../interfaces/Emoji";
 import { decodeEntity } from "html-entities";
 
+let random = Math.random();
+
 export default function MemoryCard({
   handleClick,
   data,

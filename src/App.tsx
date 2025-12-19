@@ -46,12 +46,11 @@ function App() {
     const pairedEmojisArray: Emoji[] = [...data, ...data];
 
     //Fisher–Yates shuffle Algorithm
-    for (let i = 0; i < pairedEmojisArray.length; i++) {
+    for (let i = pairedEmojisArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
       const temp = pairedEmojisArray[i];
-      const r = Math.floor(Math.random() * pairedEmojisArray.length);
-
-      pairedEmojisArray[i] = pairedEmojisArray[r];
-      pairedEmojisArray[r] = temp;
+      pairedEmojisArray[i] = pairedEmojisArray[j];
+      pairedEmojisArray[j] = temp;
     }
 
     return pairedEmojisArray;

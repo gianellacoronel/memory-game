@@ -23,9 +23,9 @@ function App() {
 
       const data: Emoji[] = await response.json();
       const dataSlice: Emoji[] = getDataSlice(data);
+      const emojisArray = getEmojisArray(dataSlice);
 
-      console.log(getRandomIndices(data));
-      setEmojisData(dataSlice);
+      setEmojisData(emojisArray);
       setIsGameOn(true);
     } catch (e) {
       console.error(e);
@@ -40,6 +40,21 @@ function App() {
     );
 
     return dataSlice;
+  }
+
+  function getEmojisArray(data: Emoji[]): Emoji[] {
+    const pairedEmojisArray: Emoji[] = [...data, ...data];
+
+    //Fisher–Yates shuffle Algorithm
+    for (let i = 0; i < pairedEmojisArray.length; i++) {
+      const temp = pairedEmojisArray[i];
+      const r = Math.floor(Math.random() * pairedEmojisArray.length);
+
+      pairedEmojisArray[i] = pairedEmojisArray[r];
+      pairedEmojisArray[r] = temp;
+    }
+
+    return pairedEmojisArray;
   }
 
   function getRandomIndices(data: Emoji[]): number[] {

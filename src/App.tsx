@@ -2,10 +2,13 @@ import { useState } from "react";
 import "./App.css";
 import Form from "./components/Form";
 import MemoryCard from "./components/MemoryCard";
+import type { Emoji } from "./interfaces/Emoji";
 
 function App() {
   const [isGameOn, setIsGameOn] = useState(false);
+  const [emojisData, setEmojisData] = useState<Emoji[]>([]);
 
+  console.log(emojisData);
   async function startGame(
     e: React.FormEvent<HTMLInputElement>,
   ): Promise<void> {
@@ -18,8 +21,10 @@ function App() {
         throw new Error("Error fetching Emoji API");
       }
 
-      const data = await response.json();
-      console.log(data);
+      const data: Emoji[] = await response.json();
+      const dataSample: Emoji[] = data.slice(0, 5);
+
+      setEmojisData(dataSample);
       setIsGameOn(true);
     } catch (e) {
       console.error(e);

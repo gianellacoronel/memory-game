@@ -34,10 +34,10 @@ function App() {
 
   function getDataSlice(data: Emoji[]) {
     const randomIndices = getRandomIndices(data);
-    const dataSlice: Emoji[] = [];
-    randomIndices.map((randomIndice) => {
-      dataSlice.push(data[randomIndice]);
-    });
+
+    const dataSlice: Emoji[] = randomIndices.map(
+      (randomIndice) => data[randomIndice],
+    );
 
     return dataSlice;
   }

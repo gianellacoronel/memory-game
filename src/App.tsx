@@ -14,8 +14,6 @@ function App() {
   ): Promise<void> {
     e.preventDefault();
     try {
-      const random = Math.random() * emojisData.length;
-
       const response = await fetch(
         "https://emojihub.yurace.pro/api/all/category/animals-and-nature",
       );
@@ -24,14 +22,24 @@ function App() {
       }
 
       const data: Emoji[] = await response.json();
-      const dataSample: Emoji[] = data.slice(random, random + 5);
+      const dataSlice: Emoji[] = getDataSlice(data);
 
       console.log(getRandomIndices(data));
-      setEmojisData(dataSample);
+      setEmojisData(dataSlice);
       setIsGameOn(true);
     } catch (e) {
       console.error(e);
     }
+  }
+
+  function getDataSlice(data: Emoji[]) {
+    const randomIndices = getRandomIndices(data);
+    const dataSlice: Emoji[] = [];
+    randomIndices.map((randomIndice) => {
+      dataSlice.push(data[randomIndice]);
+    });
+
+    return dataSlice;
   }
 
   function getRandomIndices(data: Emoji[]): number[] {

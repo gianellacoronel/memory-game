@@ -7,8 +7,13 @@ import type { Emoji } from "./interfaces/Emoji";
 function App() {
   const [isGameOn, setIsGameOn] = useState(false);
   const [emojisData, setEmojisData] = useState<Emoji[]>([]);
+  const [selectedCards, setSelectedCards] = useState<
+    {
+      name: string;
+      index: number;
+    }[]
+  >([]);
 
-  console.log(emojisData);
   async function startGame(
     e: React.FormEvent<HTMLInputElement>,
   ): Promise<void> {
@@ -73,7 +78,7 @@ function App() {
   }
 
   function turnCard(name: string, index: number): void {
-    console.log({ name, index });
+    setSelectedCards([{ name, index }]);
   }
 
   return (

@@ -16,8 +16,9 @@ function App() {
   const [matchedCards, setMatchedCards] = useState<
     { name: string; index: number }[]
   >([]);
+  const [isGameOver, setIsGameOver] = useState<boolean>(false);
 
-  console.log(matchedCards);
+  console.log(isGameOver);
 
   useEffect(() => {
     if (
@@ -30,6 +31,12 @@ function App() {
       ]);
     }
   }, [selectedCards]);
+
+  useEffect(() => {
+    if (emojisData.length && matchedCards.length === emojisData.length) {
+      setIsGameOver(true);
+    }
+  }, [matchedCards]);
 
   async function startGame(
     e: React.FormEvent<HTMLInputElement>,

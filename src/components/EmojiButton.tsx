@@ -1,18 +1,20 @@
-import { decodeEntity } from "html-entities";
-import type { Emoji } from "../interfaces/Emoji";
-
 export function EmojiButton({
   content,
+  selectedCardEntry,
+  matchedCardEntry,
   style,
   handleClick,
 }: {
-  content: Emoji;
+  content: string;
+  selectedCardEntry: { name: string; index: number } | undefined;
+  matchedCardEntry: { name: string; index: number } | undefined;
   style: string;
   handleClick: () => void;
 }) {
+  const btnContent = selectedCardEntry || matchedCardEntry ? content : "?";
   return (
     <button className={style} onClick={handleClick}>
-      {decodeEntity(content.htmlCode[0])}
+      {btnContent}
     </button>
   );
 }

@@ -14,6 +14,8 @@ function App() {
     }[]
   >([]);
 
+  console.log(selectedCards);
+
   async function startGame(
     e: React.FormEvent<HTMLInputElement>,
   ): Promise<void> {
@@ -78,7 +80,18 @@ function App() {
   }
 
   function turnCard(name: string, index: number): void {
-    setSelectedCards([{ name, index }]);
+    const selectedCardEntry = selectedCards.find(
+      (card) => card.index === index,
+    );
+
+    if (!selectedCardEntry && selectedCards.length < 2) {
+      setSelectedCards((prevSelectedCards) => [
+        ...prevSelectedCards,
+        { name, index },
+      ]);
+    } else if (!selectedCardEntry && selectedCards.length === 2) {
+      setSelectedCards([{ name, index }]);
+    }
   }
 
   return (

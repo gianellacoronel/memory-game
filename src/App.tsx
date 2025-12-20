@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Form from "./components/Form";
 import MemoryCard from "./components/MemoryCard";
@@ -13,8 +13,23 @@ function App() {
       index: number;
     }[]
   >([]);
+  const [matchedCards, setMatchedCards] = useState<
+    { name: string; index: number }[]
+  >([]);
 
-  console.log(selectedCards);
+  console.log(matchedCards);
+
+  useEffect(() => {
+    if (
+      selectedCards.length === 2 &&
+      selectedCards[0].name === selectedCards[1].name
+    ) {
+      setMatchedCards((prevMatchedCards) => [
+        ...prevMatchedCards,
+        ...selectedCards,
+      ]);
+    }
+  }, [selectedCards]);
 
   async function startGame(
     e: React.FormEvent<HTMLInputElement>,

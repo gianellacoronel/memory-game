@@ -45,7 +45,7 @@ function App() {
   function getEmojisArray(data: Emoji[]): Emoji[] {
     const pairedEmojisArray: Emoji[] = [...data, ...data];
 
-    //Fisher–Yates shuffle Algorithm
+    //Fisher–Yates shuffle Algorithm based on the video
     for (let i = pairedEmojisArray.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       const temp = pairedEmojisArray[i];
@@ -72,8 +72,8 @@ function App() {
     return randomIndicesArray;
   }
 
-  function turnCard(): void {
-    console.log("Memory card clicked");
+  function turnCard(name: string, index: number): void {
+    console.log({ name, index });
   }
 
   return (

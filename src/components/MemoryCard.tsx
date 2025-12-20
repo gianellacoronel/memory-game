@@ -1,5 +1,5 @@
 import type { Emoji } from "../interfaces/Emoji";
-import { decodeEntity } from "html-entities";
+import { EmojiButton } from "./EmojiButton";
 
 export default function MemoryCard({
   handleClick,
@@ -8,16 +8,15 @@ export default function MemoryCard({
   handleClick: (name: string, index: number) => void;
   data: Emoji[];
 }) {
-  const emojiEl = data.map((emoji: Emoji, index) => (
+  const cardEl = data.map((emoji: Emoji, index) => (
     <li key={index} className="card-item">
-      <button
-        className="btn btn--emoji"
-        onClick={() => handleClick(emoji.name, index)}
-      >
-        {decodeEntity(emoji.htmlCode[0])}
-      </button>
+      <EmojiButton
+        content={emoji}
+        style="btn btn--emoji"
+        handleClick={() => handleClick(emoji.name, index)}
+      />
     </li>
   ));
 
-  return <ul className="card-container">{emojiEl}</ul>;
+  return <ul className="card-container">{cardEl}</ul>;
 }

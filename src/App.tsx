@@ -18,7 +18,7 @@ function App() {
   >([]);
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
 
-  console.log(isGameOver);
+  console.log(selectedCards);
 
   useEffect(() => {
     if (

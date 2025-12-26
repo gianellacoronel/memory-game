@@ -102,16 +102,12 @@ function App() {
   }
 
   function turnCard(name: string, index: number): void {
-    const selectedCardEntry = selectedCards.find(
-      (card) => card.index === index,
-    );
-
-    if (!selectedCardEntry && selectedCards.length < 2) {
+    if (selectedCards.length < 2) {
       setSelectedCards((prevSelectedCards) => [
         ...prevSelectedCards,
         { name, index },
       ]);
-    } else if (!selectedCardEntry && selectedCards.length === 2) {
+    } else if (selectedCards.length === 2) {
       setSelectedCards([{ name, index }]);
     }
   }

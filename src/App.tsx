@@ -8,6 +8,11 @@ import GameOver from "./components/GameOver";
 import ErrorCard from "./components/ErrorCard";
 
 function App() {
+  const initialFormData: { category: string; number: number } = {
+    category: "animals-and-nature",
+    number: 10,
+  };
+  const [formData, setFormData] = useState(initialFormData);
   const [isGameOn, setIsGameOn] = useState(false);
   const [emojisData, setEmojisData] = useState<Emoji[]>([]);
   const [selectedCards, setSelectedCards] = useState<
@@ -49,7 +54,7 @@ function App() {
     try {
       // throw new Error("I'm throwing a custome error");
       const response = await fetch(
-        "https://emojihub.yurace.pro/api/all/category/animals-and-nature",
+        `https://emojihub.yurace.pro/api/all/category/${formData.category}`,
       );
       if (!response.ok) {
         throw new Error("Error fetching Emoji API");
@@ -93,7 +98,7 @@ function App() {
 
   function getRandomIndices(data: Emoji[]): number[] {
     const randomIndicesArray: number[] = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < formData.number / 2; i++) {
       //The Math.random() function returns a pseudo-random floating-point number, ranging from 0 to less than 1 (i.e., including 0 but not 1).
       //Math.floor(Math.random()) to get always 0, and Math.random() * data.length to get random numbers equivalent to the data's length.
       const randomNum = Math.floor(Math.random() * data.length);

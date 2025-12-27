@@ -19,8 +19,9 @@ function App() {
     { name: string; index: number }[]
   >([]);
   const [areAllCardsMatched, setAreAllCardsMatched] = useState<boolean>(false);
+  const [isError, setIsError] = useState(false);
 
-  console.log(selectedCards);
+  console.log(isError);
 
   useEffect(() => {
     if (
@@ -59,6 +60,7 @@ function App() {
       setEmojisData(emojisArray);
       setIsGameOn(true);
     } catch (e) {
+      setIsError(true);
       console.error(e);
     }
   }
@@ -119,6 +121,10 @@ function App() {
     setSelectedCards([]);
     setMatchedCards([]);
     setAreAllCardsMatched(false);
+  }
+
+  function resetError() {
+    setIsError(false);
   }
 
   return (

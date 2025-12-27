@@ -1,15 +1,25 @@
+import { useEffect, useRef } from "react";
 import RegularButton from "./RegularButton";
 import Select from "./Select";
 
 export default function Form({
   handleSubmit,
   handleChange,
+  isFirstRender,
 }: {
   handleSubmit: any;
   handleChange: any;
+  isFirstRender: boolean;
 }) {
+  const divRef = useRef(null);
+
+  useEffect(() => {
+    if (!isFirstRender) {
+      divRef.current.focus();
+    }
+  }, []);
   return (
-    <div className="form-container">
+    <div className="form-container" ref={divRef} tabIndex={-1}>
       <p className="p--regular">
         Customize the game by selecting an emoji category and a number of memory
         cards.

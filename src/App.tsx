@@ -134,10 +134,16 @@ function App() {
     setIsError(false);
   }
 
+  function handleFormChange(e: React.ChangeEvent<HTMLInputElement>) {
+    console.log(`${e.target.name}: ${e.target.value}`);
+  }
+
   return (
     <main>
       <h1>Memory</h1>
-      {!isGameOn && !isError && <Form handleSubmit={startGame} />}
+      {!isGameOn && !isError && (
+        <Form handleSubmit={startGame} handleChange={handleFormChange} />
+      )}
       {isGameOn && !areAllCardsMatched && (
         <AssistiveTechInfo
           emojisData={emojisData}

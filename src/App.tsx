@@ -5,6 +5,7 @@ import MemoryCard from "./components/MemoryCard";
 import type { Emoji } from "./interfaces/Emoji";
 import AssistiveTechInfo from "./components/AssistiveTechInfo";
 import GameOver from "./components/GameOver";
+import ErrorCard from "./components/ErrorCard";
 
 function App() {
   const [isGameOn, setIsGameOn] = useState(false);
@@ -46,6 +47,7 @@ function App() {
   ): Promise<void> {
     e.preventDefault();
     try {
+      // throw new Error("I'm throwing a custome error");
       const response = await fetch(
         "https://emojihub.yurace.pro/api/all/category/animals-and-nature",
       );
@@ -130,7 +132,7 @@ function App() {
   return (
     <main>
       <h1>Memory</h1>
-      {!isGameOn && <Form handleSubmit={startGame} />}
+      {!isGameOn && !isError && <Form handleSubmit={startGame} />}
       {isGameOn && !areAllCardsMatched && (
         <AssistiveTechInfo
           emojisData={emojisData}
@@ -146,6 +148,7 @@ function App() {
           matchedCards={matchedCards}
         />
       )}
+      {isError && <ErrorCard handleClick={resetError} />}
     </main>
   );
 }

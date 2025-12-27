@@ -3,6 +3,8 @@ import "./App.css";
 import Form from "./components/Form";
 import MemoryCard from "./components/MemoryCard";
 import type { Emoji } from "./interfaces/Emoji";
+import AssistiveTechInfo from "./components/AssistiveTechInfo";
+import GameOver from "./components/GameOver";
 
 function App() {
   const [isGameOn, setIsGameOn] = useState(false);
@@ -16,7 +18,7 @@ function App() {
   const [matchedCards, setMatchedCards] = useState<
     { name: string; index: number }[]
   >([]);
-  const [isGameOver, setIsGameOver] = useState<boolean>(false);
+  const [areAllCardsMatched, setAreAllCardsMatched] = useState<boolean>(false);
 
   console.log(selectedCards);
 
@@ -34,7 +36,7 @@ function App() {
 
   useEffect(() => {
     if (emojisData.length && matchedCards.length === emojisData.length) {
-      setIsGameOver(true);
+      setAreAllCardsMatched(true);
     }
   }, [matchedCards]);
 
@@ -116,6 +118,12 @@ function App() {
     <main>
       <h1>Memory</h1>
       {!isGameOn && <Form handleSubmit={startGame} />}
+      {isGameOn && !areAllCardsMatched && (
+        <AssistiveTechInfo
+          emojisData={emojisData}
+          matchedCards={matchedCards}
+        />
+      )}
       {isGameOn && (
         <MemoryCard
           handleClick={turnCard}
@@ -124,6 +132,7 @@ function App() {
           matchedCards={matchedCards}
         />
       )}
+      {areAllCardsMatched && <GameOver />}
     </main>
   );
 }

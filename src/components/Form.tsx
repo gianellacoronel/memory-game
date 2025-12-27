@@ -1,4 +1,5 @@
 import RegularButton from "./RegularButton";
+import Select from "./Select";
 
 export default function Form({
   handleSubmit,
@@ -9,8 +10,13 @@ export default function Form({
 }) {
   return (
     <div className="form-container">
+      <p className="p--regular">
+        Customize the game by selecting an emoji category and a number of memory
+        cards.
+      </p>
       <form className="wrapper">
-        <div className="form__inner-wrapper">
+        <Select handleChange={handleChange} />
+        {/*<div className="form__inner-wrapper">
           <label htmlFor="category">Category</label>
           <select name="category" id="category" onChange={handleChange}>
             <option value="animals-and-nature">Animals and nature</option>
@@ -29,7 +35,7 @@ export default function Form({
             <option value="40">40</option>
             <option value="50">50</option>
           </select>
-        </div>
+        </div>*/}
         <RegularButton handleClick={handleSubmit}>Start Game</RegularButton>
       </form>
     </div>

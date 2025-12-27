@@ -124,6 +124,7 @@ function App() {
           matchedCards={matchedCards}
         />
       )}
+      {areAllCardsMatched && <GameOver />}
       {isGameOn && (
         <MemoryCard
           handleClick={turnCard}
@@ -132,7 +133,6 @@ function App() {
           matchedCards={matchedCards}
         />
       )}
-      {areAllCardsMatched && <GameOver />}
     </main>
   );
 }
